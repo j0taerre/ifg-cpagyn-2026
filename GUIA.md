@@ -1,109 +1,42 @@
-# 🚀 GUIA RÁPIDO DE USO
+# Guia Rápido de Uso
 
-## Para Usar no Google Colab 
+Este projeto automatiza a contagem dos dados das planilhas respostas da CPA, e exporta em visualizações gráficas avançadas num único pacote útil.
 
-### Passo 1: Abrir o Notebook
-1. Acesse https://colab.research.google.com
-2. Clique em "Arquivo" → "Fazer upload de notebook"
-3. Selecione o arquivo `Analise_Pesquisa_IF_Colab.ipynb`
+## 1. Preparando suas Planilhas
 
-### Passo 2: Executar
-1. Execute todas as células em ordem (Ctrl + F9)
-2. Quando solicitado, faça upload dos arquivos Excel com as respostas da pesquisa, bem como do script python de análise (analise_pesquisa_2025.py)
-3. Aguarde a geração dos gráficos e relatórios
-4. Baixe os arquivos gerados na última célula
+Você precisa de até dois arquivos do Excel em disco:
+* **Planilha de Pesquisa (Obrigatória)**: Deve ter 3 abas essenciais prontas (DISCENTES, DOCENTES, TAES). As duas primeiras colunas de cada aba representam o Vínculo e o Campus do eleitorado. As colunas seguintes são as respostas fechadas das escalas (Ótimo, Bom, Regular, Ruim, Péssimo, Não sei).
+* **Planilha Demográfica (Opcional)**: Tabela contendo num somatório os totais corretos de alunos matriculados e servidores. Serve somente para calcular a fatia da sua amostra (Representatividade percentual real).
 
----
+## 2. Rodando no Google Colab (Para qualquer Computador)
 
-## Para Usar Localmente (Python)
+Opção veloz pois o computador do Google processa e já tem o ambiente empacotador.
 
-### Passo 1: Instalar Dependências
+1. Navegue e Acesse: https://colab.research.google.com
+2. Abra um Novo Notebook limpo.
+3. Copie o nosso código inteiro de dentro de `analise_pesquisa_2025.py` e cole em um quadro (célula).
+4. Rode a Célula apertando Play.
+5. Ele poderá interromper momentaneamente para lhe solicitar (via upload) seus os arquivos gerados no passo 1.
+6. Uma pasta chamada `resultados_analise/` aparecerá no canto esquerdo. Todos os arquivos e o PDF estarão agrupados e unificados para baixar.
+
+## 3. Rodando no Próprio Computador Local (Python)
+
+Destinado aos avaliadores que possuem desenvolvimento pré estabelecido ou já mantêm o interpretador Python na máquina com as bibliotecas Pandas e afins.
+
+1. Instale as extensões vitais para o roteador de estatística funcionar:
 ```bash
 pip install -r requirements.txt
 ```
-
-### Passo 2: Ajustar Caminho do Arquivo
-Edite a linha 657 do arquivo `analise_pesquisa_if_completo.py`:
-```python
-CAMINHO_ARQUIVO = 'seu_arquivo.xlsx'  # Coloque o caminho correto
-```
-
-### Passo 3: Executar
+2. Abra o arquivo matriz `analise_pesquisa_2025.py` num leitor de texto puro. Vá literalmente às últimas linhas finais no bloco `if __name__ == "__main__":`. Modifique para as referências internas aos seus próprios arquivos locais os caminhos e variáveis `ARQUIVO_PESQUISA` e `ARQUIVO_DEMOGRAFICO`.
+3. Rode seu comando preferido para o gatilho da linguagem:
 ```bash
-python analise_pesquisa_if_completo.py
+python analise_pesquisa_2025.py
 ```
+4. A tela piscará informando as tabelas achadas em suas abas. Uma vez concluído, as saídas serão alocadas silenciosamente na mesma subpasta denominada `resultados_analise/`.
 
-### Passo 4: Ver Resultados
-Os arquivos serão gerados no mesmo diretório:
-- Gráficos (*.png)
-- Relatório Excel (relatorio_completo.xlsx)
-- Tabelas CSV (tabela_*.csv)
+## 4. O Que Devo Aguardar de Resultado?
 
----
+* **O PDF Oficial**: Um documento multi folha (`relatorio_graficos_*.pdf`) paginado e pronto indicando os acertos. Pode ser remetido anexamente.
+* **Imagens PNG Individuais**: Os retângulos e diagramas que seriam formados dentro do PDF ficam expostos ali avulsamente. Estudo de público em gráficos de radar, e barrinhas.
+* **Acervos de Tabelas**: Documento gigante em Excel computando a matemática bruta inteira das avaliações e subdivisões que geraram as parcelas das porcentagens. Assim como as tabelas CSV isoladas de Eixo a Eixo prontas para planilhas da coordenação institucional.
 
-## Estrutura do Arquivo Excel Necessária
-
-Seu arquivo Excel deve ter 3 abas:
-- **DISCENTES**: Respostas dos discentes
-- **DOCENTES**: Respostas dos docentes
-- **TAES**: Respostas dos TAEs
-
-Cada aba deve ter:
-- Coluna 1: Vínculo com o IF
-- Coluna 2: Campus
-- Demais colunas: Questões da pesquisa
-
-As respostas devem usar a escala: Ótimo, Bom, Regular, Ruim, Péssimo, Não sei
-
----
-
-## O Que Será Gerado
-
-### 📊 4 Gráficos PNG
-- Gráfico do Eixo 1 - Dimensão 8 (Planejamento e Avaliação)
-- Gráfico do Eixo 2 - Dimensão 1 (Missão e PDI)
-- Gráfico do Eixo 2 - Dimensão 3 (Responsabilidade Social)
-- Infográfico Executivo (resumo completo)
-
-### 📑 4 Arquivos de Dados
-- Relatório Excel completo (todas as análises em abas)
-- 3 Tabelas CSV (uma para cada Eixo-Dimensão)
-
----
-
-## Solução Rápida de Problemas
-
-### "No such file or directory"
-→ Verifique o caminho do arquivo Excel
-
-### "ModuleNotFoundError"
-→ Execute: `pip install -r requirements.txt`
-
-### Gráficos não aparecem
-→ No Colab funciona automaticamente
-→ Localmente, os arquivos são salvos como PNG
-
-### Caracteres estranhos nos gráficos
-→ Certifique-se que o Excel está em UTF-8
-
----
-
-## Personalização Rápida
-
-### Mudar Cores
-Edite o dicionário `cores_escala` (linha 64)
-
-### Adicionar Eixo-Dimensão
-Edite o dicionário `estrutura_eixos` (linha 72)
-
-### Ajustar Tamanho dos Gráficos
-Altere `plt.rcParams['figure.figsize']` (linha 54)
-
----
-
-## Precisa de Ajuda?
-📧 Email: regina.fonseca@ifg.edu.br
-          jrs.joseroberto@gmail.com
-🌐 Site: www.ifg.edu.br
-
----
